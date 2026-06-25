@@ -1,19 +1,19 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html dir="rtl" lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ط¬ط¯ظˆظ„ ط´ظٹظپطھط§طھ ط§ظ„طھظٹظ…</title>
+    <title>جدول شيفتات التيم</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     
-    <!-- ظ…ظƒطھط¨ط© ظ„ط¯ط¹ظ… ط§ظ„ط³ط­ط¨ ظˆط§ظ„ط¥ظپظ„ط§طھ ط¹ظ„ظ‰ ط´ط§ط´ط§طھ ط§ظ„ظ…ظˆط¨ط§ظٹظ„ -->
+    <!-- مكتبة لدعم السحب والإفلات على شاشات الموبايل -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mobile-drag-drop@2.3.0-rc.2/default.css">
     <script src="https://cdn.jsdelivr.net/npm/mobile-drag-drop@2.3.0-rc.2/index.min.js"></script>
 
     <style>
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: #060e1a; /* ظ„ظˆظ† ظƒط­ظ„ظٹ ط؛ط§ظ…ظ‚ ط¬ط¯ط§ */
+            background-color: #060e1a; /* لون كحلي غامق جدا */
             background-image: radial-gradient(#112240 1px, transparent 1px);
             background-size: 20px 20px;
             display: flex;
@@ -25,17 +25,17 @@
             color: #e2e8f0;
         }
         .table-container {
-            background-color: #0b182e; /* ظƒط­ظ„ظٹ ط؛ط§ظ…ظ‚ */
+            background-color: #0b182e; /* كحلي غامق */
             border-radius: 16px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
             overflow: hidden;
             width: 100%;
             max-width: 950px;
             border: 1px solid #1a2c4e;
-            position: relative; /* ظ…ظ‡ظ… ط¹ط´ط§ظ† ظ†ظ‚ط¯ط± ظ†ط­ط· ط§ظ„ط£ط²ط±ط§ط± ط¬ظˆظ‡ ط§ظ„ظ‡ظٹط¯ط± ط¨ط±ط§ط­طھظ†ط§ */
+            position: relative; /* مهم عشان نقدر نحط الأزرار جوه الهيدر براحتنا */
         }
         
-        /* ط³طھط§ظٹظ„ ط§ظ„ظ‡ظٹط¯ط± ظˆط§ظ„ط£ط²ط±ط§ط± ط§ظ„ظ„ظٹ ط¬ظˆط§ظ‡ */
+        /* ستايل الهيدر والأزرار اللي جواه */
         .header-container {
             display: flex;
             justify-content: space-between;
@@ -80,7 +80,7 @@
             color: #fff;
         }
         #undoBtn {
-            display: none; /* ظ…ط®ظپظٹ ظپظٹ ط§ظ„ط¨ط¯ط§ظٹط© */
+            display: none; /* مخفي في البداية */
             color: #ef4444;
             border-color: #ef4444;
             background-color: rgba(239, 68, 68, 0.1);
@@ -90,14 +90,14 @@
             color: white;
         }
 
-        /* ظƒظ„ط§ط³ ط¬ط¯ظٹط¯ ظ„ط¯ط¹ظ… ط§ظ„ط³ظƒط±ظˆظ„ ط¹ظ„ظ‰ ط§ظ„ظ…ظˆط¨ط§ظٹظ„ */
+        /* كلاس جديد لدعم السكرول على الموبايل */
         .table-scroll-wrapper {
             width: 100%;
             overflow-x: auto;
-            -webkit-overflow-scrolling: touch; /* طھظ…ط±ظٹط± ظ†ط§ط¹ظ… ظ„ظ„ط¢ظٹظپظˆظ† */
+            -webkit-overflow-scrolling: touch; /* تمرير ناعم للآيفون */
         }
         
-        /* ط³طھط§ظٹظ„ ظ„ظ„ط³ظƒط±ظˆظ„ ط¨ط§ط± ط¹ط´ط§ظ† ظٹظƒظˆظ† ط´ظٹظƒ */
+        /* ستايل للسكرول بار عشان يكون شيك */
         .table-scroll-wrapper::-webkit-scrollbar {
             height: 8px;
         }
@@ -114,7 +114,7 @@
 
         table {
             width: 100%;
-            min-width: 750px; /* ط¥ط¬ط¨ط§ط± ط§ظ„ط¬ط¯ظˆظ„ ط¹ظ„ظ‰ ظ…ط³ط§ط­ط© ط¹ط´ط§ظ† ط§ظ„ظƒط±ظˆطھ ظ…طھطھظپط¹طµط´ ط¹ظ„ظ‰ ط§ظ„ظ…ظˆط¨ط§ظٹظ„ */
+            min-width: 750px; /* إجبار الجدول على مساحة عشان الكروت متتفعصش على الموبايل */
             border-collapse: collapse;
             text-align: center;
         }
@@ -150,7 +150,7 @@
             font-size: 16px;
         }
         
-        /* ط®طµط§ط¦طµ ط®ظ„ط§ظٹط§ ط§ظ„ط´ظٹظپطھط§طھ ظ„طھط¯ط¹ظ… ط§ظ„ط³ط­ط¨ ظˆط§ظ„ط§ظپظ„ط§طھ ط¨ط®ظ„ظپظٹط§طھ ط§ظ„ط¨ط§طھط±ظ† ط§ظ„ظƒط­ظ„ظٹ */
+        /* خصائص خلايا الشيفتات لتدعم السحب والافلات بخلفيات الباترن الكحلي */
         .shift-cell {
             min-height: 70px;
             display: flex;
@@ -163,7 +163,7 @@
             border-radius: 8px;
         }
         td.day-shift-bg, td.night-shift-bg, td.off-shift-bg, td.friday-shift-bg { 
-            background-color: #0b182e; /* طھظˆط­ظٹط¯ ط§ظ„ظ„ظˆظ† ط§ظ„ظƒط­ظ„ظٹ */
+            background-color: #0b182e; /* توحيد اللون الكحلي */
             background-repeat: repeat;
             background-size: 40px 40px;
             background-position: center;
@@ -184,7 +184,7 @@
             background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='1.5' fill='rgba(255,255,255,0.02)'/%3E%3C/svg%3E");
         }
 
-        /* طھطµظ…ظٹظ… ظƒط±ظˆطھ ط§ظ„ط£ط³ظ…ط§ط، (ط¯ط§ط±ظƒ ظˆظ…ظˆط¯ط±ظ†) */
+        /* تصميم كروت الأسماء (دارك ومودرن) */
         .badge {
             background-color: #1a2c4e;
             color: #f1f5f9;
@@ -203,7 +203,7 @@
             gap: 5px;
             position: relative;
         }
-        /* ط¹ظ„ط§ظ…ط© ط§ظ„ظ…ط³ط­ ط¬ظˆظ‡ ط§ظ„ظƒط§ط±طھ */
+        /* علامة المسح جوه الكارت */
         .delete-badge {
             display: none;
             background-color: rgba(239, 68, 68, 0.2);
@@ -227,14 +227,14 @@
             display: flex;
         }
 
-        /* طھظ…ظٹظٹط² ظ…ط±ظٹظ… ط¨ظ„ظˆظ† ط¨ظٹظ†ظƒ ظ…ط¨ظ‡ط¬ ظ„ط§ظٹظ‚ ط¹ ط§ظ„ط¯ط§ط±ظƒ */
+        /* تمييز مريم بلون بينك مبهج لايق ع الدارك */
         .badge.maryam-badge {
             color: #f472b6;
             border-color: #be185d;
             background-color: rgba(190, 24, 93, 0.2);
         }
         
-        /* طھط£ط«ظٹط±ط§طھ ط£ط«ظ†ط§ط، ط§ظ„طھط¹ط¯ظٹظ„ ظˆط§ظ„ط³ط­ط¨ */
+        /* تأثيرات أثناء التعديل والسحب */
         .editing-mode .badge {
             cursor: grab;
             border-style: dashed;
@@ -278,7 +278,7 @@
             color: #60a5fa;
         }
         
-        /* ط³طھط§ظٹظ„ ط£ط¯ظˆط§طھ ط¥ط¶ط§ظپط© ط§ظ„ظ…ظˆط¸ظپ */
+        /* ستايل أدوات إضافة الموظف */
         .controls-container {
             display: flex;
             align-items: center;
@@ -345,7 +345,7 @@
             background-color: #2563eb;
         }
         
-        /* ط³طھط§ظٹظ„ ط£ط²ط±ط§ط± ط§ظ„ظ…ط³ط­ ط§ظ„ط¬ط¯ظٹط¯ط© */
+        /* ستايل أزرار المسح الجديدة */
         .clear-all-btn {
             color: #ef4444 !important;
             border-color: #ef4444 !important;
@@ -381,7 +381,7 @@
             border-radius: 2px;
         }
         
-        /* طھط¸ط¨ظٹط· ظ…ظ‚ط§ط³ط§طھ ط§ظ„ظ…ظˆط¨ط§ظٹظ„ */
+        /* تظبيط مقاسات الموبايل */
         @media (max-width: 768px) {
             .header-container {
                 flex-direction: column;
@@ -421,43 +421,40 @@
 <body>
 
     <div class="table-container">
-        <!-- ط§ظ„ظ‡ظٹط¯ط± ط§ظ„ط¬ط¯ظٹط¯ ط¨ط§ظ„ط£ط²ط±ط§ط± ط§ظ„ظ„ظٹ ظپظˆظ‚ ط¹ظ„ظ‰ ط§ظ„ط´ظ…ط§ظ„ -->
+        <!-- الهيدر الجديد بالأزرار اللي فوق على الشمال -->
         <div class="header-container">
-            <h2>ط¬ط¯ظˆظ„ ط´ظٹظپطھط§طھ ط§ظ„طھظٹظ… ًں“…</h2>
+            <h2>جدول شيفتات التيم 📅</h2>
             <div class="top-actions">
-                <button id="clearAllBtn" class="icon-btn clear-all-btn" title="ظ…ط³ط­ ظƒظ„ ط§ظ„ط¬ط¯ظˆظ„">
+                <button id="clearAllBtn" class="icon-btn clear-all-btn" title="مسح كل الجدول">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
                 </button>
-                <button id="undoBtn" class="icon-btn" title="طھط±ط§ط¬ط¹ ط¹ظ† ط§ظ„طھط¹ط¯ظٹظ„ط§طھ">
+                <button id="undoBtn" class="icon-btn" title="تراجع عن التعديلات">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v6h6"></path><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"></path></svg>
                 </button>
-                <button id="shareBtn" class="icon-btn" title="Copy Share Link">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-                </button>
-                <button id="editBtn" class="icon-btn" title="طھط¹ط¯ظٹظ„ ط§ظ„ط¬ط¯ظˆظ„">
+                <button id="editBtn" class="icon-btn" title="تعديل الجدول">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
                 </button>
             </div>
         </div>
         
-        <!-- ط´ط±ظٹط· ط¥ط¶ط§ظپط© ظ…ظˆط¸ظپ ط¬ط¯ظٹط¯ -->
+        <!-- شريط إضافة موظف جديد -->
         <div class="controls-container">
             <div class="control-group">
-                <input type="text" id="newEmpName" class="add-emp-input" placeholder="ط§ط³ظ… ط§ظ„ظ…ظˆط¸ظپ ط§ظ„ط¬ط¯ظٹط¯...">
-                <input type="color" id="newEmpColor" class="color-picker" value="#10b981" title="ط§ط®طھط± ظ„ظˆظ† ط§ظ„ظƒط§ط±طھ">
+                <input type="text" id="newEmpName" class="add-emp-input" placeholder="اسم الموظف الجديد...">
+                <input type="color" id="newEmpColor" class="color-picker" value="#10b981" title="اختر لون الكارت">
                 <button id="addEmpBtn" class="add-btn">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                    ط¥ط¶ط§ظپط©
+                    إضافة
                 </button>
             </div>
             
             <div class="controls-divider"></div>
             
             <div class="control-group">
-                <input type="text" id="deleteEmpName" class="add-emp-input" placeholder="ط§ط³ظ… ط§ظ„ظ…ظˆط¸ظپ ظ„ظ…ط³ط­ظ‡...">
+                <input type="text" id="deleteEmpName" class="add-emp-input" placeholder="اسم الموظف لمسحه...">
                 <button id="deleteEmpBtn" class="delete-btn">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="18" y1="8" x2="23" y2="13"></line><line x1="23" y1="8" x2="18" y2="13"></line></svg>
-                    ظ…ط³ط­
+                    مسح
                 </button>
             </div>
         </div>
@@ -466,58 +463,58 @@
             <table id="shiftsTable">
                 <thead>
                     <tr>
-                        <th>ط§ظ„ظٹظˆظ…</th>
-                        <th>ط´ظٹظپطھ ط§ظ„ظ†ظ‡ط§ط± âک€ï¸ڈ</th>
-                        <th>ط´ظٹظپطھ ط§ظ„ظ„ظٹظ„ ًںŒ™</th>
-                        <th>ط¥ط¬ط§ط²ط© ًںڈ–ï¸ڈ</th>
+                        <th>اليوم</th>
+                        <th>شيفت النهار ☀️</th>
+                        <th>شيفت الليل 🌙</th>
+                        <th>إجازة 🏖️</th>
                     </tr>
                 </thead>
             <tbody id="tableBody">
-                <!-- ط§ظ„ط³ط¨طھ -->
+                <!-- السبت -->
                 <tr>
-                    <td class="day-col">ط§ظ„ط³ط¨طھ</td>
+                    <td class="day-col">السبت</td>
                     <td class="day-shift-bg"><div class="shift-cell"></div></td>
                     <td class="night-shift-bg"><div class="shift-cell"></div></td>
                     <td class="off-shift-bg"><div class="shift-cell"></div></td>
                 </tr>
-                <!-- ط§ظ„ط£ط­ط¯ -->
+                <!-- الأحد -->
                 <tr>
-                    <td class="day-col">ط§ظ„ط£ط­ط¯</td>
+                    <td class="day-col">الأحد</td>
                     <td class="day-shift-bg"><div class="shift-cell"></div></td>
                     <td class="night-shift-bg"><div class="shift-cell"></div></td>
                     <td class="off-shift-bg"><div class="shift-cell"></div></td>
                 </tr>
-                <!-- ط§ظ„ط§ط«ظ†ظٹظ† -->
+                <!-- الاثنين -->
                 <tr>
-                    <td class="day-col">ط§ظ„ط§ط«ظ†ظٹظ†</td>
+                    <td class="day-col">الاثنين</td>
                     <td class="day-shift-bg"><div class="shift-cell"></div></td>
                     <td class="night-shift-bg"><div class="shift-cell"></div></td>
                     <td class="off-shift-bg"><div class="shift-cell"></div></td>
                 </tr>
-                <!-- ط§ظ„ط«ظ„ط§ط«ط§ط، -->
+                <!-- الثلاثاء -->
                 <tr>
-                    <td class="day-col">ط§ظ„ط«ظ„ط§ط«ط§ط،</td>
+                    <td class="day-col">الثلاثاء</td>
                     <td class="day-shift-bg"><div class="shift-cell"></div></td>
                     <td class="night-shift-bg"><div class="shift-cell"></div></td>
                     <td class="off-shift-bg"><div class="shift-cell"></div></td>
                 </tr>
-                <!-- ط§ظ„ط£ط±ط¨ط¹ط§ط، -->
+                <!-- الأربعاء -->
                 <tr>
-                    <td class="day-col">ط§ظ„ط£ط±ط¨ط¹ط§ط،</td>
+                    <td class="day-col">الأربعاء</td>
                     <td class="day-shift-bg"><div class="shift-cell"></div></td>
                     <td class="night-shift-bg"><div class="shift-cell"></div></td>
                     <td class="off-shift-bg"><div class="shift-cell"></div></td>
                 </tr>
-                <!-- ط§ظ„ط®ظ…ظٹط³ -->
+                <!-- الخميس -->
                 <tr>
-                    <td class="day-col">ط§ظ„ط®ظ…ظٹط³</td>
+                    <td class="day-col">الخميس</td>
                     <td class="day-shift-bg"><div class="shift-cell"></div></td>
                     <td class="night-shift-bg"><div class="shift-cell"></div></td>
                     <td class="off-shift-bg"><div class="shift-cell"></div></td>
                 </tr>
-                <!-- ط§ظ„ط¬ظ…ط¹ط© -->
+                <!-- الجمعة -->
                 <tr>
-                    <td class="day-col">ط§ظ„ط¬ظ…ط¹ط©</td>
+                    <td class="day-col">الجمعة</td>
                     <td colspan="2" class="friday-shift-bg"><div class="shift-cell"></div></td>
                     <td class="off-shift-bg"><div class="shift-cell"></div></td>
                 </tr>
@@ -526,56 +523,47 @@
     </div>
     
     <div class="notes">
-            <strong>ًں“Œ ظ…ظˆط§ط¹ظٹط¯ ط§ظ„ط´ظٹظپطھط§طھ:</strong>
+            <strong>📌 مواعيد الشيفتات:</strong>
             <ul>
-                <li><strong>ط§ظ„ظ†ظ‡ط§ط±:</strong> ظ…ظ† 11 طµط¨ط§ط­ط§ظ‹ ط¥ظ„ظ‰ 6 ظ…ط³ط§ط،ظ‹</li>
-                <li><strong>ط§ظ„ظ„ظٹظ„:</strong> ظ…ظ† 4 ظ…ط³ط§ط،ظ‹ ط¥ظ„ظ‰ 11 ظ…ط³ط§ط،ظ‹</li>
-                <li><strong>ط§ظ„ط¬ظ…ط¹ط©:</strong> ط´ظٹظپطھ ظˆط§ط­ط¯ ظ…ط¬ظ…ط¹ ظ…ظ† 2 ظ…ط³ط§ط،ظ‹ ط¥ظ„ظ‰ 9 ظ…ط³ط§ط،ظ‹</li>
+                <li><strong>النهار:</strong> من 11 صباحاً إلى 6 مساءً</li>
+                <li><strong>الليل:</strong> من 4 مساءً إلى 11 مساءً</li>
+                <li><strong>الجمعة:</strong> شيفت واحد مجمع من 2 مساءً إلى 9 مساءً</li>
             </ul>
         </div>
     </div>
 
     <script>
-        // طھظپط¹ظٹظ„ ط¯ط¹ظ… ط§ظ„ط³ط­ط¨ ظˆط§ظ„ط¥ظپظ„ط§طھ ظ„ط´ط§ط´ط§طھ ط§ظ„طھط§طھط´ (ط§ظ„ظ…ظˆط¨ط§ظٹظ„)
+        // تفعيل دعم السحب والإفلات لشاشات التاتش (الموبايل)
         MobileDragDrop.polyfill({
-            holdToDrag: 200 // ط§ظ„ط¶ط؛ط· ظ„ظ…ط¯ط© 200 ظ…ظ„ظٹ ط«ط§ظ†ظٹط© ظ„ط¨ط¯ط، ط§ظ„ط³ط­ط¨ ط¹ط´ط§ظ† ظ…ظٹطھط¹ط§ط±ط¶ط´ ظ…ط¹ ط³ظƒط±ظˆظ„ ط§ظ„طµظپط­ط©
+            holdToDrag: 200 // الضغط لمدة 200 ملي ثانية لبدء السحب عشان ميتعارضش مع سكرول الصفحة
         });
-        // ط³ط·ط± ط¶ط±ظˆط±ظٹ ط¹ط´ط§ظ† ط§ظ„ط³ط­ط¨ ظٹط´طھط؛ظ„ ط¨ط³ظ„ط§ط³ط© ظˆظ…ظٹط¹ظ…ظ„ط´ طھط¯ط§ط®ظ„ ظ…ط¹ ط§ظ„ظ…طھطµظپط­
+        // سطر ضروري عشان السحب يشتغل بسلاسة وميعملش تداخل مع المتصفح
         window.addEventListener('touchmove', function() {}, {passive: false});
 
         document.addEventListener('DOMContentLoaded', () => {
             const tableBody = document.getElementById('tableBody');
             const editBtn = document.getElementById('editBtn');
             const undoBtn = document.getElementById('undoBtn');
-            const shareBtn = document.getElementById('shareBtn');
             const table = document.getElementById('shiftsTable');
             
-            // ط¹ظ†ط§طµط± ط¥ط¶ط§ظپط© ط§ظ„ظ…ظˆط¸ظپ
+            // عناصر إضافة الموظف
             const addEmpBtn = document.getElementById('addEmpBtn');
             const newEmpName = document.getElementById('newEmpName');
             const newEmpColor = document.getElementById('newEmpColor');
 
-            // ط¹ظ†ط§طµط± ظ…ط³ط­ ط§ظ„ظ…ظˆط¸ظپظٹظ†
+            // عناصر مسح الموظفين
             const clearAllBtn = document.getElementById('clearAllBtn');
             const deleteEmpBtn = document.getElementById('deleteEmpBtn');
             const deleteEmpName = document.getElementById('deleteEmpName');
 
             let isEditing = false;
-            let originalData = ''; // ظ„طھط®ط²ظٹظ† ط­ط§ظ„ط© ط§ظ„ط¬ط¯ظˆظ„ ظ‚ط¨ظ„ ط§ظ„طھط¹ط¯ظٹظ„ (ظ„ظ„ظ€ Undo)
+            let originalData = ''; // لتخزين حالة الجدول قبل التعديل (للـ Undo)
             
-            // طھط¹ط±ظٹظپ ط§ظ„ط£ظٹظ‚ظˆظ†ط§طھ
+            // تعريف الأيقونات
             const editIcon = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>`;
             const saveIcon = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>`;
 
-            function encodeState(rawHtml) {
-                return btoa(unescape(encodeURIComponent(rawHtml)));
-            }
-
-            function decodeState(encodedHtml) {
-                return decodeURIComponent(escape(atob(encodedHtml)));
-            }
-
-            // ًںڑ€ ط¯ط§ظ„ط© ط§ظ„ط­ظپط¸ ط§ظ„طھظ„ظ‚ط§ط¦ظٹ ط§ظ„ط¬ط¯ظٹط¯ط© (Auto-Save)
+            // 🚀 دالة الحفظ التلقائي الجديدة (Auto-Save)
             function resetDragBindingFlags(scope = document) {
                 scope.querySelectorAll('.badge').forEach(badge => {
                     delete badge.dataset.dragAttached;
@@ -586,49 +574,40 @@
                 });
             }
 
-            function getCleanTableStateHtml() {
+            function saveTableState() {
                 const tempContainer = document.createElement('tbody');
                 tempContainer.innerHTML = tableBody.innerHTML;
+                
+                // تنظيف الكروت من خصائص السحب المؤقتة قبل الحفظ عشان لو عمل ريفريش يرجع الجدول نضيف
                 tempContainer.querySelectorAll('.badge').forEach(badge => {
                     badge.setAttribute('draggable', 'false');
                     badge.classList.remove('dragging');
                 });
                 resetDragBindingFlags(tempContainer);
-                return tempContainer.innerHTML;
+                
+                localStorage.setItem('shiftDragData_v2', tempContainer.innerHTML);
             }
 
-            function saveTableState() {
-                localStorage.setItem('shiftDragData_v2', getCleanTableStateHtml());
-            }
-
-            // ط§ط³طھط±ط¬ط§ط¹ ط§ظ„ط¨ظٹط§ظ†ط§طھ ط§ظ„ظ…ط­ظپظˆط¸ط©
-            const sharedState = window.location.hash.startsWith('#state=') ? window.location.hash.slice(7) : '';
-            let savedData = localStorage.getItem('shiftDragData_v2');
-            if (sharedState) {
-                try {
-                    savedData = decodeState(sharedState);
-                } catch (error) {
-                    console.error('Invalid shared state link', error);
-                }
-            }
+            // استرجاع البيانات المحفوظة
+            const savedData = localStorage.getItem('shiftDragData_v2');
             if (savedData) {
                 tableBody.innerHTML = savedData;
                 resetDragBindingFlags(tableBody);
             }
 
-            // طھظپط¹ظٹظ„ ط§ظ„ط³ط­ط¨ ظˆط§ظ„ط§ظپظ„ط§طھ
+            // تفعيل السحب والافلات
             function setupDragAndDrop() {
                 const badges = document.querySelectorAll('.badge');
                 const cells = document.querySelectorAll('.shift-cell');
 
                 badges.forEach(badge => {
-                    // ط¥ط¶ط§ظپط© ط²ط±ط§ط± ط§ظ„ط­ط°ظپ ظ„ظˆ ظ…ط´ ظ…ظˆط¬ظˆط¯ (ظ„ظ„ظƒط±ظˆطھ ط§ظ„ظ‚ط¯ظٹظ…ط© ط£ظˆ ط§ظ„ط¬ط¯ظٹط¯ط©)
+                    // إضافة زرار الحذف لو مش موجود (للكروت القديمة أو الجديدة)
                     if (!badge.querySelector('.delete-badge')) {
-                        const text = badge.innerText.replace('أ—', '').trim();
-                        badge.innerHTML = `<span class="badge-text">${text}</span><span class="delete-badge" title="ط­ط°ظپ ط§ظ„ظ…ظˆط¸ظپ">&times;</span>`;
+                        const text = badge.innerText.replace('×', '').trim();
+                        badge.innerHTML = `<span class="badge-text">${text}</span><span class="delete-badge" title="حذف الموظف">&times;</span>`;
                     }
 
-                    // ظ…ظ†ط¹ طھظƒط±ط§ط± ط±ط¨ط· ط§ظ„ط­ط¯ط«
+                    // منع تكرار ربط الحدث
                     if (badge.dataset.dragAttached) return;
                     badge.dataset.dragAttached = "true";
                     
@@ -639,7 +618,7 @@
                         }
                         this.classList.add('dragging');
                         e.dataTransfer.effectAllowed = 'move';
-                        const nameText = this.querySelector('.badge-text') ? this.querySelector('.badge-text').innerText : this.innerText.replace('أ—', '').trim();
+                        const nameText = this.querySelector('.badge-text') ? this.querySelector('.badge-text').innerText : this.innerText.replace('×', '').trim();
                         e.dataTransfer.setData('text/plain', nameText);
                     });
 
@@ -649,7 +628,7 @@
                 });
 
                 cells.forEach(cell => {
-                    // ظ…ظ†ط¹ طھظƒط±ط§ط± ط±ط¨ط· ط§ظ„ط­ط¯ط«
+                    // منع تكرار ربط الحدث
                     if (cell.dataset.dropAttached) return;
                     cell.dataset.dropAttached = "true";
 
@@ -669,7 +648,7 @@
                         this.classList.remove('drag-over');
                         const draggingBadge = document.querySelector('.dragging');
                         if (draggingBadge) {
-                            originalData = tableBody.innerHTML; // ط­ظپط¸ ظ„ظ„ظ€ Undo
+                            originalData = tableBody.innerHTML; // حفظ للـ Undo
                             let targetCell = this;
                             
                             if(e.target.closest('.badge')) {
@@ -677,7 +656,7 @@
                             }
                             if (targetCell) {
                                 targetCell.appendChild(draggingBadge);
-                                saveTableState(); // ًں’¾ ط­ظپط¸ طھظ„ظ‚ط§ط¦ظٹ ط¨ط¹ط¯ ط§ظ„ظ†ظ‚ظ„
+                                saveTableState(); // 💾 حفظ تلقائي بعد النقل
                             }
                         }
                     });
@@ -686,12 +665,12 @@
 
             setupDragAndDrop();
 
-            // طھظپط§ط¹ظ„ ط§ظ„ط­ط°ظپ (Delegation ط¹ظ„ظ‰ ط§ظ„ط¬ط¯ظˆظ„)
+            // تفاعل الحذف (Delegation على الجدول)
             tableBody.addEventListener('click', (e) => {
                 if (isEditing && e.target.classList.contains('delete-badge')) {
-                    originalData = tableBody.innerHTML; // ط­ظپط¸ ظ„ظ„ظ€ Undo
+                    originalData = tableBody.innerHTML; // حفظ للـ Undo
                     e.target.closest('.badge').remove();
-                    saveTableState(); // ًں’¾ ط­ظپط¸ طھظ„ظ‚ط§ط¦ظٹ ط¨ط¹ط¯ ط§ظ„ط­ط°ظپ
+                    saveTableState(); // 💾 حفظ تلقائي بعد الحذف
                 }
             });
 
@@ -699,11 +678,11 @@
                 isEditing = !isEditing;
 
                 if (isEditing) {
-                    // ط¨ط¯ط£ ظˆط¶ط¹ ط§ظ„طھط¹ط¯ظٹظ„
+                    // بدأ وضع التعديل
                     originalData = tableBody.innerHTML; 
                     
                     editBtn.innerHTML = saveIcon;
-                    editBtn.title = "ط¥ط؛ظ„ط§ظ‚ ط§ظ„طھط¹ط¯ظٹظ„";
+                    editBtn.title = "إغلاق التعديل";
                     editBtn.classList.add('save-mode');
                     table.classList.add('editing-mode');
                     undoBtn.style.display = 'flex'; 
@@ -712,9 +691,9 @@
                         badge.setAttribute('draggable', 'true');
                     });
                 } else {
-                    // ط¥ظ†ظ‡ط§ط، ط§ظ„طھط¹ط¯ظٹظ„
+                    // إنهاء التعديل
                     editBtn.innerHTML = editIcon;
-                    editBtn.title = "طھط¹ط¯ظٹظ„ ط§ظ„ط¬ط¯ظˆظ„";
+                    editBtn.title = "تعديل الجدول";
                     editBtn.classList.remove('save-mode');
                     table.classList.remove('editing-mode');
                     undoBtn.style.display = 'none'; 
@@ -723,16 +702,16 @@
                         badge.setAttribute('draggable', 'false');
                     });
                     
-                    saveTableState(); // ًں’¾ ط­ظپط¸ طھظ„ظ‚ط§ط¦ظٹ ط¹ظ†ط¯ ط§ظ„ط¥ط؛ظ„ط§ظ‚
+                    saveTableState(); // 💾 حفظ تلقائي عند الإغلاق
                 }
             });
 
-            // ط¨ط±ظ…ط¬ط© ط²ط± ط§ظ„طھط±ط§ط¬ط¹ (Undo)
+            // برمجة زر التراجع (Undo)
             undoBtn.addEventListener('click', () => {
                 if (isEditing && originalData) {
-                    tableBody.innerHTML = originalData; // ط§ط³طھط±ط¬ط§ط¹ ط§ظ„ظ†ط³ط®ط© ط§ظ„ط£طµظ„ظٹط©
+                    tableBody.innerHTML = originalData; // استرجاع النسخة الأصلية
                     
-                    // ظ…ط³ط­ ط§ظ„طھط§ط¬ط² ط§ظ„ظ‚ط¯ظٹظ…ط© ط¹ط´ط§ظ† ظ†ط±ط¨ط· ط§ظ„ط£ط­ط¯ط§ط« ظ…ظ† ط¬ط¯ظٹط¯ ط¨ط¯ظˆظ† ظ…ط´ط§ظƒظ„
+                    // مسح التاجز القديمة عشان نربط الأحداث من جديد بدون مشاكل
                     resetDragBindingFlags(tableBody);
                     
                     setupDragAndDrop(); 
@@ -741,15 +720,15 @@
                         badge.setAttribute('draggable', 'true');
                     });
 
-                    saveTableState(); // ًں’¾ ط­ظپط¸ طھظ„ظ‚ط§ط¦ظٹ ط¨ط¹ط¯ ط§ظ„طھط±ط§ط¬ط¹
+                    saveTableState(); // 💾 حفظ تلقائي بعد التراجع
                 }
             });
 
-            // ط¨ط±ظ…ط¬ط© ط¥ط¶ط§ظپط© ظ…ظˆط¸ظپ ط¬ط¯ظٹط¯
+            // برمجة إضافة موظف جديد
             addEmpBtn.addEventListener('click', () => {
                 const name = newEmpName.value.trim();
                 if (!name) {
-                    alert('ظٹط±ط¬ظ‰ ط¥ط¯ط®ط§ظ„ ط§ط³ظ… ط§ظ„ظ…ظˆط¸ظپ!');
+                    alert('يرجى إدخال اسم الموظف!');
                     return;
                 }
 
@@ -759,17 +738,17 @@
                 const b = parseInt(hexColor.slice(5, 7), 16);
                 const bgRgba = `rgba(${r}, ${g}, ${b}, 0.2)`;
 
-                // ط¥ظ†ط´ط§ط، ظƒط§ط±طھ ط¬ط¯ظٹط¯ 
+                // إنشاء كارت جديد 
                 const badgeHTML = `<div class="badge" style="color: ${hexColor}; border-color: ${hexColor}; background-color: ${bgRgba};">
                     <span class="badge-text">${name}</span>
-                    <span class="delete-badge" title="ط­ط°ظپ ط§ظ„ظ…ظˆط¸ظپ">&times;</span>
+                    <span class="delete-badge" title="حذف الموظف">&times;</span>
                 </div>`;
 
                 if (isEditing) {
                     originalData = tableBody.innerHTML;
                 }
 
-                // ط¥ط¶ط§ظپط© ط§ظ„ظ…ظˆط¸ظپ
+                // إضافة الموظف
                 const dayShifts = document.querySelectorAll('.day-shift-bg .shift-cell, .friday-shift-bg .shift-cell');
                 
                 dayShifts.forEach(cell => {
@@ -787,12 +766,12 @@
                 setupDragAndDrop();
                 newEmpName.value = '';
                 
-                saveTableState(); // ًں’¾ ط­ظپط¸ طھظ„ظ‚ط§ط¦ظٹ ط¨ط¹ط¯ ط¥ط¶ط§ظپط© ط§ظ„ظ…ظˆط¸ظپ
+                saveTableState(); // 💾 حفظ تلقائي بعد إضافة الموظف
             });
 
-            // ط¨ط±ظ…ط¬ط© ط²ط± ظ…ط³ط­ ظƒظ„ ط§ظ„ط¬ط¯ظˆظ„
+            // برمجة زر مسح كل الجدول
             clearAllBtn.addEventListener('click', () => {
-                if(confirm('âڑ ï¸ڈ ظ‡ظ„ ط£ظ†طھ ظ…طھط£ظƒط¯ ظ…ظ† ظ…ط³ط­ ط¬ظ…ظٹط¹ ط§ظ„ظ…ظˆط¸ظپظٹظ† ظ…ظ† ط§ظ„ط¬ط¯ظˆظ„ ط¨ط§ظ„ظƒط§ظ…ظ„طں ظ„ط§ ظٹظ…ظƒظ† ط§ظ„طھط±ط§ط¬ط¹ ط¹ظ† ظ‡ط°ظ‡ ط§ظ„ط®ط·ظˆط© ط¥ظ„ط§ ط¥ط°ط§ ظƒظ†طھ ظپظٹ ظˆط¶ط¹ ط§ظ„طھط¹ط¯ظٹظ„.')) {
+                if(confirm('⚠️ هل أنت متأكد من مسح جميع الموظفين من الجدول بالكامل؟ لا يمكن التراجع عن هذه الخطوة إلا إذا كنت في وضع التعديل.')) {
                     if (isEditing) {
                         originalData = tableBody.innerHTML;
                     }
@@ -803,15 +782,15 @@
                 }
             });
 
-            // ط¨ط±ظ…ط¬ط© ط²ط± ظ…ط³ط­ ظ…ظˆط¸ظپ ظ…ط¹ظٹظ† ظ…ظ† ظƒظ„ ط§ظ„ط£ظٹط§ظ…
+            // برمجة زر مسح موظف معين من كل الأيام
             deleteEmpBtn.addEventListener('click', () => {
                 const nameToDelete = deleteEmpName.value.trim();
                 if (!nameToDelete) {
-                    alert('ظٹط±ط¬ظ‰ ط¥ط¯ط®ط§ظ„ ط§ط³ظ… ط§ظ„ظ…ظˆط¸ظپ ط§ظ„ظ…ط±ط§ط¯ ظ…ط³ط­ظ‡!');
+                    alert('يرجى إدخال اسم الموظف المراد مسحه!');
                     return;
                 }
 
-                if(confirm(`ظ‡ظ„ ط£ظ†طھ ظ…طھط£ظƒط¯ ظ…ظ† ظ…ط³ط­ ط§ظ„ظ…ظˆط¸ظپ "${nameToDelete}" ظ…ظ† ظƒظ„ ط£ظٹط§ظ… ط§ظ„ط¬ط¯ظˆظ„طں`)) {
+                if(confirm(`هل أنت متأكد من مسح الموظف "${nameToDelete}" من كل أيام الجدول؟`)) {
                     if (isEditing) {
                         originalData = tableBody.innerHTML;
                     }
@@ -819,7 +798,7 @@
                     let found = false;
                     document.querySelectorAll('.badge').forEach(badge => {
                         const badgeTextEl = badge.querySelector('.badge-text');
-                        const badgeName = badgeTextEl ? badgeTextEl.innerText.trim() : badge.innerText.replace('أ—', '').trim();
+                        const badgeName = badgeTextEl ? badgeTextEl.innerText.trim() : badge.innerText.replace('×', '').trim();
                         
                         if(badgeName === nameToDelete) {
                             badge.remove();
@@ -831,7 +810,7 @@
                         deleteEmpName.value = '';
                         saveTableState();
                     } else {
-                        alert(`ظ„ظ… ظٹطھظ… ط§ظ„ط¹ط«ظˆط± ط¹ظ„ظ‰ ظ…ظˆط¸ظپ ط¨ط§ط³ظ… "${nameToDelete}" ظپظٹ ط§ظ„ط¬ط¯ظˆظ„.`);
+                        alert(`لم يتم العثور على موظف باسم "${nameToDelete}" في الجدول.`);
                     }
                 }
             });
