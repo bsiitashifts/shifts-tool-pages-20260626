@@ -544,6 +544,7 @@
             const tableBody = document.getElementById('tableBody');
             const editBtn = document.getElementById('editBtn');
             const undoBtn = document.getElementById('undoBtn');
+            const shareBtn = document.getElementById('shareBtn');
             const table = document.getElementById('shiftsTable');
             
             // عناصر إضافة الموظف
@@ -563,6 +564,14 @@
             const editIcon = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>`;
             const saveIcon = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>`;
 
+            function encodeState(rawHtml) {
+                return btoa(unescape(encodeURIComponent(rawHtml)));
+            }
+
+            function decodeState(encodedHtml) {
+                return decodeURIComponent(escape(atob(encodedHtml)));
+            }
+
             // 🚀 دالة الحفظ التلقائي الجديدة (Auto-Save)
             function resetDragBindingFlags(scope = document) {
                 scope.querySelectorAll('.badge').forEach(badge => {
@@ -574,22 +583,31 @@
                 });
             }
 
-            function saveTableState() {
+            function getCleanTableStateHtml() {
                 const tempContainer = document.createElement('tbody');
                 tempContainer.innerHTML = tableBody.innerHTML;
-                
-                // تنظيف الكروت من خصائص السحب المؤقتة قبل الحفظ عشان لو عمل ريفريش يرجع الجدول نضيف
                 tempContainer.querySelectorAll('.badge').forEach(badge => {
                     badge.setAttribute('draggable', 'false');
                     badge.classList.remove('dragging');
                 });
                 resetDragBindingFlags(tempContainer);
-                
-                localStorage.setItem('shiftDragData_v2', tempContainer.innerHTML);
+                return tempContainer.innerHTML;
+            }
+
+            function saveTableState() {
+                localStorage.setItem('shiftDragData_v2', getCleanTableStateHtml());
             }
 
             // استرجاع البيانات المحفوظة
-            const savedData = localStorage.getItem('shiftDragData_v2');
+            const sharedState = window.location.hash.startsWith('#state=') ? window.location.hash.slice(7) : '';
+            let savedData = localStorage.getItem('shiftDragData_v2');
+            if (sharedState) {
+                try {
+                    savedData = decodeState(sharedState);
+                } catch (error) {
+                    console.error('Invalid shared state link', error);
+                }
+            }
             if (savedData) {
                 tableBody.innerHTML = savedData;
                 resetDragBindingFlags(tableBody);
