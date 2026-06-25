@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>جدول شيفتات التيم</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- مكتبة لدعم السحب والإفلات على شاشات الموبايل -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mobile-drag-drop@2.3.0-rc.2/default.css">
+    <script src="https://cdn.jsdelivr.net/npm/mobile-drag-drop@2.3.0-rc.2/index.min.js"></script>
+
     <style>
         body {
             font-family: 'Cairo', sans-serif;
@@ -190,6 +195,8 @@
             border: 1px solid #334a7a;
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
             user-select: none;
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
             transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             display: inline-flex;
             align-items: center;
@@ -526,6 +533,13 @@
     </div>
 
     <script>
+        // تفعيل دعم السحب والإفلات لشاشات التاتش (الموبايل)
+        MobileDragDrop.polyfill({
+            holdToDrag: 200 // الضغط لمدة 200 ملي ثانية لبدء السحب عشان ميتعارضش مع سكرول الصفحة
+        });
+        // سطر ضروري عشان السحب يشتغل بسلاسة وميعملش تداخل مع المتصفح
+        window.addEventListener('touchmove', function() {}, {passive: false});
+
         document.addEventListener('DOMContentLoaded', () => {
             const tableBody = document.getElementById('tableBody');
             const editBtn = document.getElementById('editBtn');
