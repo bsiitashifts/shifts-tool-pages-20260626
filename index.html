@@ -39,26 +39,6 @@
             background-color: #0b182e;
             border-bottom: 2px solid #060e1a;
         }
-        .table-container {
-            background-color: #1e293b; /* Slate 800 */
-            border-radius: 16px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            overflow: hidden;
-            width: 100%;
-            max-width: 950px;
-            border: 1px solid #334155;
-            position: relative; /* مهم عشان نقدر نحط الأزرار جوه الهيدر براحتنا */
-        }
-        
-        /* ستايل الهيدر والأزرار اللي جواه */
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 24px;
-            background-color: #1e293b;
-            border-bottom: 2px solid #0f172a;
-        }
         h2 {
             margin: 0;
             color: #f8fafc;
@@ -105,8 +85,31 @@
             color: white;
         }
 
+        /* كلاس جديد لدعم السكرول على الموبايل */
+        .table-scroll-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch; /* تمرير ناعم للآيفون */
+        }
+        
+        /* ستايل للسكرول بار عشان يكون شيك */
+        .table-scroll-wrapper::-webkit-scrollbar {
+            height: 8px;
+        }
+        .table-scroll-wrapper::-webkit-scrollbar-track {
+            background: #060e1a;
+        }
+        .table-scroll-wrapper::-webkit-scrollbar-thumb {
+            background: #1a2c4e;
+            border-radius: 4px;
+        }
+        .table-scroll-wrapper::-webkit-scrollbar-thumb:hover {
+            background: #3b82f6;
+        }
+
         table {
             width: 100%;
+            min-width: 750px; /* إجبار الجدول على مساحة عشان الكروت متتفعصش على الموبايل */
             border-collapse: collapse;
             text-align: center;
         }
@@ -278,6 +281,11 @@
             border-bottom: 2px solid #060e1a;
             flex-wrap: wrap;
         }
+        .control-group {
+            display: flex;
+            gap: 10px;
+            flex-grow: 1;
+        }
         .add-emp-input {
             background-color: #060e1a;
             border: 1px solid #1a2c4e;
@@ -366,7 +374,36 @@
             border-radius: 2px;
         }
         
+        /* تظبيط مقاسات الموبايل */
         @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .top-actions {
+                width: 100%;
+                justify-content: center;
+            }
+            .controls-container {
+                flex-direction: column;
+                padding: 15px;
+            }
+            .control-group {
+                width: 100%;
+            }
+            .add-emp-input {
+                flex-grow: 1;
+                width: auto;
+                max-width: none;
+            }
+            .controls-divider {
+                width: 100%;
+                height: 1px;
+                margin: 5px 0;
+            }
+            .add-btn, .delete-btn {
+                flex-shrink: 0;
+            }
             th, td { padding: 10px 5px; }
             .badge { padding: 6px 10px; font-size: 13px; }
             h2 { font-size: 20px; }
@@ -395,31 +432,31 @@
         
         <!-- شريط إضافة موظف جديد -->
         <div class="controls-container">
-            <input type="text" id="newEmpName" class="add-emp-input" placeholder="اسم الموظف الجديد...">
-            <input type="color" id="newEmpColor" class="color-picker" value="#10b981" title="اختر لون الكارت">
-            <button id="addEmpBtn" class="add-btn">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                إضافة
-            </button>
+            <div class="control-group">
+                <input type="text" id="newEmpName" class="add-emp-input" placeholder="اسم الموظف الجديد...">
+                <input type="color" id="newEmpColor" class="color-picker" value="#10b981" title="اختر لون الكارت">
+                <button id="addEmpBtn" class="add-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    إضافة
+                </button>
+            </div>
             
             <div class="controls-divider"></div>
             
-            <input type="text" id="deleteEmpName" class="add-emp-input" placeholder="اسم الموظف لمسحه...">
-            <button id="deleteEmpBtn" class="delete-btn">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="18" y1="8" x2="23" y2="13"></line><line x1="23" y1="8" x2="18" y2="13"></line></svg>
-                مسح
-            </button>
+            <div class="control-group">
+                <input type="text" id="deleteEmpName" class="add-emp-input" placeholder="اسم الموظف لمسحه...">
+                <button id="deleteEmpBtn" class="delete-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="18" y1="8" x2="23" y2="13"></line><line x1="23" y1="8" x2="18" y2="13"></line></svg>
+                    مسح
+                </button>
+            </div>
         </div>
 
-        <table id="shiftsTable">
-            <thead>
-                <tr>
-                    <th>اليوم</th>
-                    <th>شيفت النهار ☀️</th>
-                    <th>شيفت الليل 🌙</th>
-                    <th>إجازة 🏖️</th>
-                </tr>
-            </thead>
+        <div class="table-scroll-wrapper">
+            <table id="shiftsTable">
+                <thead>
+                    <tr>
+                        <th>اليوم</th>
             <tbody id="tableBody">
                 <!-- السبت -->
                 <tr>
@@ -462,15 +499,15 @@
                     <td class="day-shift-bg"><div class="shift-cell"></div></td>
                     <td class="night-shift-bg"><div class="shift-cell"></div></td>
                     <td class="off-shift-bg"><div class="shift-cell"></div></td>
-                </tr>
-                <!-- الجمعة -->
-                <tr>
-                    <td class="day-col">الجمعة</td>
-                    <td colspan="2" class="friday-shift-bg"><div class="shift-cell"></div></td>
-                    <td class="off-shift-bg"><div class="shift-cell"></div></td>
-                </tr>
-            </tbody>
-        </table>
+                    <!-- الجمعة -->
+                    <tr>
+                        <td class="day-col">الجمعة</td>
+                        <td colspan="2" class="friday-shift-bg"><div class="shift-cell"></div></td>
+                        <td class="off-shift-bg"><div class="shift-cell"></div></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         
         <div class="notes">
             <strong>📌 مواعيد الشيفتات:</strong>
