@@ -469,6 +469,17 @@
                     مسح
                 </button>
             </div>
+
+            <div class="controls-divider"></div>
+
+            <div class="control-group">
+                <input type="text" id="renameEmpOldName" class="add-emp-input" placeholder="الاسم الحالي...">
+                <input type="text" id="renameEmpNewName" class="add-emp-input" placeholder="الاسم الجديد...">
+                <button id="renameEmpBtn" class="add-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 1 1 3 3L7 19l-4 1 1-4Z"></path></svg>
+                    تعديل
+                </button>
+            </div>
         </div>
 
         <div class="table-scroll-wrapper">
@@ -568,6 +579,9 @@
             const clearAllBtn = document.getElementById('clearAllBtn');
             const deleteEmpBtn = document.getElementById('deleteEmpBtn');
             const deleteEmpName = document.getElementById('deleteEmpName');
+            const renameEmpBtn = document.getElementById('renameEmpBtn');
+            const renameEmpOldName = document.getElementById('renameEmpOldName');
+            const renameEmpNewName = document.getElementById('renameEmpNewName');
 
             let isEditing = false;
             let originalData = ''; // لتخزين حالة الجدول قبل التعديل (للـ Undo)
@@ -1066,6 +1080,48 @@
                     } else {
                         alert(`لم يتم العثور على موظف باسم "${nameToDelete}" في الجدول.`);
                     }
+                }
+            });
+
+            renameEmpBtn.addEventListener('click', () => {
+                const oldName = renameEmpOldName.value.trim();
+                const newName = renameEmpNewName.value.trim();
+
+                if (!oldName || !newName) {
+                    alert('يرجى إدخال الاسم الحالي والاسم الجديد!');
+                    return;
+                }
+
+                if (oldName === newName) {
+                    alert('الاسم الجديد هو نفسه الاسم الحالي.');
+                    return;
+                }
+
+                if (isEditing) {
+                    originalData = tableBody.innerHTML;
+                }
+
+                let found = false;
+                document.querySelectorAll('.badge').forEach(badge => {
+                    const badgeTextEl = badge.querySelector('.badge-text');
+                    const badgeName = badgeTextEl ? badgeTextEl.innerText.trim() : badge.innerText.replace('×', '').trim();
+
+                    if (badgeName === oldName) {
+                        if (badgeTextEl) {
+                            badgeTextEl.innerText = newName;
+                        } else {
+                            badge.innerText = newName;
+                        }
+                        found = true;
+                    }
+                });
+
+                if (found) {
+                    renameEmpOldName.value = '';
+                    renameEmpNewName.value = '';
+                    saveTableState();
+                } else {
+                    alert(`لم يتم العثور على موظف باسم "${oldName}" في الجدول.`);
                 }
             });
 
