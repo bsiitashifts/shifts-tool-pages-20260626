@@ -289,44 +289,63 @@
         
         /* ستايل أدوات إضافة الموظف */
         .controls-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 15px 24px;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+            padding: 18px 24px;
             background-color: #0b182e;
             border-bottom: 2px solid #060e1a;
-            flex-wrap: wrap;
+        }
+        .control-card {
+            background: linear-gradient(180deg, rgba(15, 31, 58, 0.96), rgba(10, 23, 44, 0.92));
+            border: 1px solid #1f3255;
+            border-radius: 14px;
+            padding: 14px;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+            min-width: 0;
+        }
+        .control-card-title {
+            display: block;
+            margin-bottom: 10px;
+            color: #cbd5e1;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.2px;
         }
         .control-group {
             display: flex;
             gap: 10px;
-            flex-grow: 1;
+            align-items: center;
+            flex-wrap: wrap;
         }
         .add-emp-input {
             background-color: #060e1a;
             border: 1px solid #1a2c4e;
             color: #f8fafc;
-            padding: 8px 16px;
-            border-radius: 8px;
+            padding: 10px 14px;
+            border-radius: 10px;
             font-family: inherit;
             font-size: 14px;
             outline: none;
-            transition: border-color 0.3s;
-            flex-grow: 1;
-            max-width: 200px;
+            transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s;
+            flex: 1 1 150px;
+            min-width: 0;
         }
         .add-emp-input:focus {
             border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+            background-color: #081426;
         }
         .color-picker {
             background-color: transparent;
-            border: none;
-            width: 36px;
-            height: 36px;
+            border: 1px solid #1f3255;
+            width: 44px;
+            height: 44px;
             cursor: pointer;
-            padding: 0;
-            border-radius: 8px;
+            padding: 3px;
+            border-radius: 10px;
             overflow: hidden;
+            flex: 0 0 44px;
         }
         .color-picker::-webkit-color-swatch-wrapper {
             padding: 0;
@@ -339,19 +358,23 @@
             background-color: #3b82f6;
             color: white;
             border: none;
-            padding: 8px 16px;
-            border-radius: 8px;
+            padding: 10px 16px;
+            border-radius: 10px;
             font-family: inherit;
             font-size: 14px;
             font-weight: bold;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.2s ease, box-shadow 0.2s ease;
             display: flex;
             align-items: center;
             gap: 6px;
+            justify-content: center;
+            min-height: 44px;
         }
         .add-btn:hover {
             background-color: #2563eb;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 18px rgba(37, 99, 235, 0.22);
         }
         
         /* ستايل أزرار المسح الجديدة */
@@ -368,29 +391,31 @@
             background-color: #ef4444;
             color: white;
             border: none;
-            padding: 8px 16px;
-            border-radius: 8px;
+            padding: 10px 16px;
+            border-radius: 10px;
             font-family: inherit;
             font-size: 14px;
             font-weight: bold;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.2s ease, box-shadow 0.2s ease;
             display: flex;
             align-items: center;
             gap: 6px;
+            justify-content: center;
+            min-height: 44px;
         }
         .delete-btn:hover {
             background-color: #dc2626;
-        }
-        .controls-divider {
-            width: 2px;
-            height: 30px;
-            background-color: #1a2c4e;
-            margin: 0 10px;
-            border-radius: 2px;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 18px rgba(220, 38, 38, 0.22);
         }
         
         /* تظبيط مقاسات الموبايل */
+        @media (max-width: 1080px) {
+            .controls-container {
+                grid-template-columns: 1fr;
+            }
+        }
         @media (max-width: 768px) {
             .header-container {
                 flex-direction: column;
@@ -401,24 +426,13 @@
                 justify-content: center;
             }
             .controls-container {
-                flex-direction: column;
                 padding: 15px;
             }
-            .control-group {
-                width: 100%;
-            }
             .add-emp-input {
-                flex-grow: 1;
-                width: auto;
-                max-width: none;
-            }
-            .controls-divider {
-                width: 100%;
-                height: 1px;
-                margin: 5px 0;
+                flex-basis: 100%;
             }
             .add-btn, .delete-btn {
-                flex-shrink: 0;
+                width: 100%;
             }
             th, td { padding: 10px 5px; }
             .badge { padding: 6px 10px; font-size: 13px; }
@@ -451,34 +465,39 @@
         
         <!-- شريط إضافة موظف جديد -->
         <div class="controls-container">
-            <div class="control-group">
+            <div class="control-card">
+                <span class="control-card-title">إضافة موظف جديد</span>
+                <div class="control-group">
                 <input type="text" id="newEmpName" class="add-emp-input" placeholder="اسم الموظف الجديد...">
                 <input type="color" id="newEmpColor" class="color-picker" value="#10b981" title="اختر لون الكارت">
                 <button id="addEmpBtn" class="add-btn">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                     إضافة
                 </button>
+                </div>
             </div>
             
-            <div class="controls-divider"></div>
-            
-            <div class="control-group">
+            <div class="control-card">
+                <span class="control-card-title">حذف موظف من الجدول</span>
+                <div class="control-group">
                 <input type="text" id="deleteEmpName" class="add-emp-input" placeholder="اسم الموظف لمسحه...">
                 <button id="deleteEmpBtn" class="delete-btn">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="18" y1="8" x2="23" y2="13"></line><line x1="23" y1="8" x2="18" y2="13"></line></svg>
                     مسح
                 </button>
+                </div>
             </div>
 
-            <div class="controls-divider"></div>
-
-            <div class="control-group">
+            <div class="control-card">
+                <span class="control-card-title">تعديل اسم موظف</span>
+                <div class="control-group">
                 <input type="text" id="renameEmpOldName" class="add-emp-input" placeholder="الاسم الحالي...">
                 <input type="text" id="renameEmpNewName" class="add-emp-input" placeholder="الاسم الجديد...">
                 <button id="renameEmpBtn" class="add-btn">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 1 1 3 3L7 19l-4 1 1-4Z"></path></svg>
                     تعديل
                 </button>
+                </div>
             </div>
         </div>
 
